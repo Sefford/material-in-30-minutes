@@ -19,6 +19,7 @@ package com.sefford.material.sample.contacts.details.ui.views;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -50,15 +51,16 @@ public class ContactDetailView {
     AdapterView avData;
     @InjectView(R.id.iv_cover)
     ImageView ivCover;
+    @InjectView(R.id.tb_main)
+    Toolbar toolbar;
 
     Picasso picasso;
 
     public ContactDetailView(RendererAdapter adapter, List<Renderable> contactData, Resources resources) {
         this.adapter = adapter;
         this.contactData = contactData;
-        this.contactData.add(new Trolling());
         this.resources = resources;
-        placeholder = new LetterTileDrawable(resources);
+        this.placeholder = new LetterTileDrawable(resources, 0);
     }
 
     public void bind(View view) {
@@ -90,6 +92,7 @@ public class ContactDetailView {
     }
 
     public void setCover(Contact contact, String color) {
+        toolbar.setTitle(contact.getName());
         placeholder.setContactDetails(contact.getName(), color);
         picasso.load(contact.getPhoto())
                 .placeholder(R.color.primary_pressed_50)
@@ -104,6 +107,11 @@ public class ContactDetailView {
 
     public void setPhones(List<Phone> phones) {
         this.contactData.addAll(phones);
+        adapter.notifyDataSetChanged();
+    }
+
+    public void addTrolling() {
+        this.contactData.add(new Trolling());
         adapter.notifyDataSetChanged();
     }
 }

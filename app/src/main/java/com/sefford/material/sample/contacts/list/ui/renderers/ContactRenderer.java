@@ -58,9 +58,10 @@ public class ContactRenderer implements Renderer<Contact> {
 
     public ContactRenderer(Resources resources, View view) {
         ButterKnife.inject(this, view);
-        this.transformation = new RoundedBorderTransformation(resources.getDimensionPixelSize(R.dimen.avatar_rounded_corners));
+        // This change will turn the rounded border into a circular avatar
+        this.transformation = new RoundedBorderTransformation(resources.getDimensionPixelSize(R.dimen.avatar_size));
         picasso = Picasso.with(view.getContext());
-        placeholder = new LetterTileDrawable(view.getResources());
+        placeholder = new LetterTileDrawable(view.getResources(), view.getResources().getDimensionPixelSize(R.dimen.avatar_rounded_corners));
     }
 
     @Override

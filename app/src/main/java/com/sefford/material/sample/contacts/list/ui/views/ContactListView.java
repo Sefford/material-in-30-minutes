@@ -17,6 +17,7 @@
 package com.sefford.material.sample.contacts.list.ui.views;
 
 import android.content.Intent;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import butterknife.ButterKnife;
@@ -41,6 +42,8 @@ public class ContactListView {
 
     @InjectView(R.id.av_data)
     AdapterView avData;
+    @InjectView(R.id.tb_main)
+    Toolbar toolbar;
 
     @Inject
     public ContactListView(RendererAdapter adapter, List<Renderable> contacts) {
@@ -50,6 +53,7 @@ public class ContactListView {
 
     public void bind(View view) {
         ButterKnife.inject(this, view);
+        toolbar.setTitle(R.string.app_name);
         avData.setAdapter(adapter);
         avData.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -67,7 +71,9 @@ public class ContactListView {
     }
 
     public void setContacts(Collection<Contact> contacts) {
-        this.contacts.addAll(contacts);
-        adapter.notifyDataSetChanged();
+        if (this.contacts.isEmpty()) {
+            this.contacts.addAll(contacts);
+            adapter.notifyDataSetChanged();
+        }
     }
 }
