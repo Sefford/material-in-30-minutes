@@ -9,7 +9,8 @@
                                        style="@style/Material30.ActionBar"
                                        android:layout_height="wrap_content"
                                        android:layout_width="match_parent"
-                                       app:theme="@style/Material30.ActionBar"/>
+                                       app:theme="@style/Material30.ActionBar"
+                                       android:elevation="2dp"/>
 
     <ListView android:id="@+id/av_data"
               android:layout_width="match_parent"
