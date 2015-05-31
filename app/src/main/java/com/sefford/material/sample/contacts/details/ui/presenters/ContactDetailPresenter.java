@@ -64,6 +64,7 @@ public class ContactDetailPresenter {
         this.view.setCover(response.getContact(), userColor);
         this.view.setPhones(response.getPhones());
         this.view.setMails(response.getMails());
+        this.view.addTrolling();
     }
 
     public void setUserColor(String userColor) {

@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
-       android:shape="rectangle">
+       android:shape="oval">
     <solid android:color="@color/primary_dark"/>
-    <corners android:radius="@dimen/avatar_rounded_corners"/>
     <size
             android:height="@dimen/avatar_size"
             android:width="@dimen/avatar_size"/>

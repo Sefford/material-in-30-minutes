@@ -6,7 +6,7 @@
 
     <uses-sdk
             android:minSdkVersion="16"
-            android:targetSdkVersion="19"/>
+            android:targetSdkVersion="21"/>
 
     <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
     <uses-permission android:name="android.permission.READ_CONTACTS"/>
@@ -19,7 +19,7 @@
                   android:launchMode="singleTask"
                   android:name=".contacts.list.ui.activities.ContactListActivity"
                   android:screenOrientation="portrait"
-                  android:theme="@android:style/Theme.Holo.Light"
+                  android:theme="@style/Material30.Theme"
                   android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -30,7 +30,7 @@
                   android:launchMode="singleTask"
                   android:name=".contacts.details.ui.activities.ContactDetailsActivity"
                   android:screenOrientation="portrait"
-                  android:theme="@android:style/Theme.Holo.Light"
+                  android:theme="@style/Material30.Theme"
                   android:windowSoftInputMode="adjustPan"/>
     </application>
 

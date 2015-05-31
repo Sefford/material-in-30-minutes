@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <style name="Material30.Theme" parent="Theme.AppCompat.Light">
+        <item name="android:windowBackground">@android:color/white</item>
+        <!-- Main theme colors for branding purposes -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <!-- Theme UI controls like checkboxes and text fields -->
+        <item name="colorAccent">@color/primary_accented</item>
+        <item name="colorControlHighlight">@color/primary_pressed</item>
+        <item name="android:textColorPrimary">@android:color/primary_text_light</item>
+    </style>
+
+    <style name="Material30.ActionBar" parent="ThemeOverlay.AppCompat.ActionBar">
+        <item name="android:background">@color/primary</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+    </style>
+
     <style name="contact_element">
         <item name="android:gravity">center_vertical|left</item>
         <item name="android:drawablePadding">8dp</item>

@@ -57,7 +57,6 @@ public class LetterTileDrawable extends Drawable {
     private static int sTileFontColor;
     private static float sLetterToTileRatio;
     private static Drawable DEFAULT_PERSON_AVATAR;
-    private static float round;
     private static RectF rounderRect = new RectF();
     private final String TAG = LetterTileDrawable.class.getSimpleName();
     private final Paint mPaint;
@@ -65,11 +64,13 @@ public class LetterTileDrawable extends Drawable {
     private String mIdentifier;
     private float mScale = 1.0f;
     private float mOffset = 0.0f;
+    private float round;
 
-    public LetterTileDrawable(final Resources res) {
+    public LetterTileDrawable(final Resources res, int roundEdge) {
         mPaint = new Paint();
         mPaint.setFilterBitmap(true);
         mPaint.setDither(true);
+        round = roundEdge;
 
         if (sColors == null) {
             sColors = res.obtainTypedArray(R.array.letter_tile_colors);
@@ -77,7 +78,6 @@ public class LetterTileDrawable extends Drawable {
             sTileFontColor = res.getColor(R.color.letter_tile_font_color);
             sLetterToTileRatio = res.getFraction(R.dimen.letter_to_tile_ratio, 1, 1);
             DEFAULT_PERSON_AVATAR = res.getDrawable(R.drawable.avatar_placeholder);
-            round = res.getDimensionPixelSize(R.dimen.avatar_rounded_corners);
             sPaint.setTypeface(Typeface.create(
                     res.getString(R.string.letter_tile_letter_font_family), Typeface.NORMAL));
             sPaint.setTextAlign(Align.CENTER);

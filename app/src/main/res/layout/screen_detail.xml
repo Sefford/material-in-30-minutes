@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -7,13 +8,21 @@
     <ImageView android:id="@+id/iv_cover"
                android:layout_width="match_parent"
                android:layout_height="256dp"
-               android:scaleType="centerCrop"/>
+               android:scaleType="centerCrop"
+               android:layout_below="@+id/tb_main"/>
 
     <ListView android:id="@+id/av_data"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:clipToPadding="false"
               android:paddingTop="256dp"
-              android:listSelector="@drawable/primary_background_selector"/>
+              android:listSelector="@drawable/primary_background_selector"
+              android:layout_below="@id/tb_main"/>
+
+    <android.support.v7.widget.Toolbar android:id="@id/tb_main"
+                                       style="@style/Material30.ActionBar"
+                                       android:layout_height="wrap_content"
+                                       android:layout_width="match_parent"
+                                       app:theme="@style/Material30.ActionBar"/>
 
 </RelativeLayout>
