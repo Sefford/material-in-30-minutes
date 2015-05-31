@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Sizes -->
+    <dimen name="avatar_size">48dp</dimen>
+    <dimen name="avatar_rounded_corners">2dp</dimen>
+    <dimen name="contact_element_height">56dp</dimen>
+    <dimen name="default_margin">8dp</dimen>
+    <item name="letter_to_tile_ratio" type="dimen">67%</item>
+</resources>
