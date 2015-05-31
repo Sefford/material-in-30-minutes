@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Material Sample</string>
+    <!-- Font family used when drawing letters for letter tile avatars.Do not translate. -->
+    <string name="letter_tile_letter_font_family">sans-serif-thin</string>
+    <string name="trolling_ipsum">I-Pod whereas you suck another point is that cult of Jobs for example typical fanboy
+        to whom you suck, who Android sells more phones, for this reason professional fanboy, so notifications are way
+        better on Android on locked down especially it\'s open when hype to begin with death-grip, due to fanboy
+        afterwards fanboi this includes Apple copied Android\'s notifications, eventually blah, blah, blah, to Gruber at
+        the beginning you\'d buy shit if Apple sold it in spite of Apple are nothing without Steve Jobs, thus
+        Antennagate, although you suck exactly because toys this is why fanboi.
+    </string>
+    <string name="mail_uri">mailto:%1$s?subject=%2$s&amp;body=%3$s</string>
+</resources>
