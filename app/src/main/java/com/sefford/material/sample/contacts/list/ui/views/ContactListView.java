@@ -17,10 +17,8 @@
 package com.sefford.material.sample.contacts.list.ui.views;
 
 import android.content.res.Resources;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.*;
+import android.view.MenuItem;
 import android.view.View;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -39,6 +37,7 @@ import java.util.List;
  */
 public class ContactListView {
 
+    static final int[] ICONS = {R.drawable.ic_grid_white, R.drawable.ic_dashboard_white, R.drawable.ic_list_white};
     final RecyclerRendererAdapter adapter;
     final List<Renderable> contacts;
     final Resources resources;
@@ -47,6 +46,9 @@ public class ContactListView {
     RecyclerView rvData;
     @InjectView(R.id.tb_main)
     Toolbar toolbar;
+
+    int layoutMode = 0;
+    private DividerItemDecoration dividerDecoration;
 
     @Inject
     public ContactListView(RecyclerRendererAdapter adapter, List<Renderable> contacts, Resources resources) {
@@ -57,11 +59,48 @@ public class ContactListView {
 
     public void bind(View view) {
         ButterKnife.inject(this, view);
+
         toolbar.setTitle(R.string.app_name);
+        toolbar.getMenu().clear();
+        toolbar.inflateMenu(R.menu.menu);
+        toolbar.setOnMenuItemClickListener(getMenuListener());
+
+        dividerDecoration = new DividerItemDecoration(resources.getDrawable(R.drawable.list_horizontal_divider), DividerItemDecoration.VERTICAL_LIST);
+
         rvData.setAdapter(adapter);
         rvData.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false));
-        rvData.addItemDecoration(new DividerItemDecoration(resources.getDrawable(R.drawable.list_horizontal_divider), DividerItemDecoration.VERTICAL_LIST));
+        rvData.addItemDecoration(dividerDecoration);
         rvData.setItemAnimator(new DefaultItemAnimator());
+    }
+
+    Toolbar.OnMenuItemClickListener getMenuListener() {
+        return new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                layoutMode++;
+                for (Renderable contact : contacts) {
+                    ((Contact) contact).setLayoutMode(Contact.LayoutMode.values()[layoutMode % Contact.LayoutMode.values().length]);
+                }
+                switch (Contact.LayoutMode.values()[layoutMode % Contact.LayoutMode.values().length]) {
+                    case LIST:
+                        rvData.setLayoutManager(new LinearLayoutManager(toolbar.getContext(), LinearLayoutManager.VERTICAL, false));
+                        break;
+                    case GRID:
+                        rvData.setLayoutManager(new GridLayoutManager(toolbar.getContext(), 2));
+                        break;
+                    case STAGGER:
+                        rvData.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+                        break;
+                }
+                if (Contact.LayoutMode.LIST.equals(Contact.LayoutMode.values()[layoutMode % Contact.LayoutMode.values().length])) {
+                    rvData.addItemDecoration(dividerDecoration);
+                } else {
+                    rvData.removeItemDecoration(dividerDecoration);
+                }
+                menuItem.setIcon(ICONS[layoutMode % ICONS.length]);
+                return true;
+            }
+        };
     }
 
     public void release() {

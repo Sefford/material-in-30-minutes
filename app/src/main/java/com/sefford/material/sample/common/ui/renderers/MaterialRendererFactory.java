@@ -47,6 +47,7 @@ public class MaterialRendererFactory implements RendererFactory {
     public Renderer getRenderer(int id, Postable postable, View view) {
         switch (id) {
             case R.layout.listitem_contact:
+            case R.layout.griditem_contact:
                 return new ContactRenderer(view.getResources(), view);
             case R.layout.listitem_mail:
                 return new MailRenderer(view, resources);

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:background="@drawable/primary_background_selector">
+
+    <ImageView android:id="@+id/iv_avatar"
+               android:layout_width="@dimen/avatar_size"
+               android:layout_height="@dimen/avatar_size"
+               android:layout_centerHorizontal="true"
+               tools:src="@drawable/avatar_placeholder"/>
+
+    <TextView android:id="@+id/tv_name"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_below="@id/iv_avatar"
+              android:layout_centerHorizontal="true"
+              android:layout_marginTop="@dimen/default_margin"
+              android:textColor="@android:color/primary_text_light"
+              android:textSize="18sp"
+              android:singleLine="true"
+              android:ellipsize="end"
+              tools:text="Papadopoulos Papandreus Esmith "/>
+
+</RelativeLayout>
