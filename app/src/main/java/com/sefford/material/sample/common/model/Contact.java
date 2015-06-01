@@ -40,6 +40,7 @@ public class Contact implements Comparable<Contact>, Renderable, RepoElement<Lon
     String name;
     List<String> phones = new ArrayList<String>();
     List<String> emails = new ArrayList<String>();
+    LayoutMode mode = LayoutMode.LIST;
 
     @Override
     public Long getId() {
@@ -121,11 +122,25 @@ public class Contact implements Comparable<Contact>, Renderable, RepoElement<Lon
 
     @Override
     public int getRenderableId() {
-        return R.layout.listitem_contact;
+        if (LayoutMode.LIST.equals(mode)) {
+            return R.layout.listitem_contact;
+        } else {
+            return R.layout.griditem_contact;
+        }
     }
 
     @Override
     public Contact update(Contact other) {
         return this;
+    }
+
+    public void setLayoutMode(LayoutMode layoutMode) {
+        this.mode = layoutMode;
+    }
+
+    public enum LayoutMode {
+        LIST,
+        GRID,
+        STAGGER
     }
 }

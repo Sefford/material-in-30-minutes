@@ -16,7 +16,9 @@
 
 package com.sefford.material.sample.contacts.list.ui.renderers;
 
+import android.content.Intent;
 import android.content.res.Resources;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -27,6 +29,7 @@ import com.sefford.material.sample.R;
 import com.sefford.material.sample.common.model.Contact;
 import com.sefford.material.sample.common.ui.components.LetterTileDrawable;
 import com.sefford.material.sample.common.ui.transformations.RoundedBorderTransformation;
+import com.sefford.material.sample.contacts.details.ui.activities.ContactDetailsActivity;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 import com.squareup.picasso.Transformation;
@@ -37,7 +40,7 @@ import com.squareup.picasso.Transformation;
  *
  * @author Saul Diaz <sefford@gmail.com>
  */
-public class ContactRenderer implements Renderer<Contact> {
+public class ContactRenderer extends RecyclerView.ViewHolder implements Renderer<Contact> {
 
     final Picasso picasso;
     /**
@@ -56,7 +59,10 @@ public class ContactRenderer implements Renderer<Contact> {
     @InjectView(R.id.tv_name)
     TextView tvName;
 
+    int position;
+
     public ContactRenderer(Resources resources, View view) {
+        super(view);
         ButterKnife.inject(this, view);
         // This change will turn the rounded border into a circular avatar
         this.transformation = new RoundedBorderTransformation(resources.getDimensionPixelSize(R.dimen.avatar_size));
@@ -66,7 +72,15 @@ public class ContactRenderer implements Renderer<Contact> {
 
     @Override
     public void hookUpListeners(final Contact renderable) {
-        // Empty
+        this.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), ContactDetailsActivity.class);
+                intent.putExtra(ContactDetailsActivity.EXTRA_ID, renderable.getId());
+                intent.putExtra(ContactDetailsActivity.EXTRA_COLOR, Integer.toString(position));
+                view.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -74,6 +88,7 @@ public class ContactRenderer implements Renderer<Contact> {
         placeholder.setContactDetails(renderable.getName(), Integer.toString(position));
         configureRequest(picasso.load(renderable.getThumbnail()));
         tvName.setText(renderable.getName());
+        this.position = position;
     }
 
     void configureRequest(RequestCreator creator) {

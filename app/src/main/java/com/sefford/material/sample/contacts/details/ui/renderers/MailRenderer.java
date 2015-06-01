@@ -16,6 +16,10 @@
 
 package com.sefford.material.sample.contacts.details.ui.renderers;
 
+import android.content.Intent;
+import android.content.res.Resources;
+import android.net.Uri;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 import com.sefford.brender.interfaces.Renderer;
@@ -25,17 +29,32 @@ import com.sefford.material.sample.contacts.details.ui.model.Mail;
 /**
  * Renderer for {@link Mail Mail} elements
  */
-public class MailRenderer implements Renderer<Mail> {
+public class MailRenderer extends RecyclerView.ViewHolder implements Renderer<Mail> {
 
+    final Resources resources;
     final TextView tvMail;
 
-    public MailRenderer(View view) {
+    public MailRenderer(View view, Resources resources) {
+        super(view);
+        this.resources = resources;
         this.tvMail = (TextView) view;
     }
 
     @Override
-    public void hookUpListeners(Mail mail) {
-
+    public void hookUpListeners(final Mail mail) {
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                Uri data = Uri.parse(resources.getString(R.string.mail_uri,
+                        mail.toString(),
+                        "Hey, this a mail sent from Material in 30 minutes sample app!",
+                        "Check this cool sample app"));
+                intent.setType("plain/text");
+                intent.setData(data);
+                view.getContext().startActivity(Intent.createChooser(intent, ""));
+            }
+        });
     }
 
     @Override

@@ -16,6 +16,9 @@
 
 package com.sefford.material.sample.contacts.details.ui.renderers;
 
+import android.content.Intent;
+import android.net.Uri;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 import com.sefford.brender.interfaces.Renderer;
@@ -25,17 +28,25 @@ import com.sefford.material.sample.contacts.details.ui.model.Phone;
 /**
  * Renderer for {@link Phone Phone} elements
  */
-public class PhoneRenderer implements Renderer<Phone> {
+public class PhoneRenderer extends RecyclerView.ViewHolder implements Renderer<Phone> {
 
     final TextView tvPhone;
 
     public PhoneRenderer(View view) {
+        super(view);
         this.tvPhone = (TextView) view;
     }
 
     @Override
-    public void hookUpListeners(Phone phone) {
-
+    public void hookUpListeners(final Phone phone) {
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("tel:" + phone.toString()));
+                view.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override

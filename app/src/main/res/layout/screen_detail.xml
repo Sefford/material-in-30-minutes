@@ -11,13 +11,12 @@
                android:scaleType="centerCrop"
                android:layout_below="@+id/tb_main"/>
 
-    <ListView android:id="@+id/av_data"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:clipToPadding="false"
-              android:paddingTop="256dp"
-              android:listSelector="@drawable/primary_background_selector"
-              android:layout_below="@id/tb_main"/>
+    <android.support.v7.widget.RecyclerView android:id="@+id/rv_data"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:clipToPadding="false"
+                                            android:paddingTop="256dp"
+                                            android:layout_below="@id/tb_main"/>
 
     <android.support.v7.widget.Toolbar android:id="@id/tb_main"
                                        style="@style/Material30.ActionBar"

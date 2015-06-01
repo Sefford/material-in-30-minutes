@@ -19,4 +19,5 @@
     </array>
     <color name="letter_tile_default_color">#cccccc</color>
     <color name="letter_tile_font_color">#ffffff</color>
+    <color name="list_divider_grey">#FFF5F5F5</color>
 </resources>
