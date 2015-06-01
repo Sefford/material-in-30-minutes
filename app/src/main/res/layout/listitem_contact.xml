@@ -4,7 +4,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:paddingLeft="@dimen/default_margin"
-                android:paddingRight="@dimen/default_margin">
+                android:paddingRight="@dimen/default_margin"
+                android:background="@drawable/primary_background_selector">
 
     <ImageView android:id="@+id/iv_avatar"
                android:layout_width="@dimen/avatar_size"

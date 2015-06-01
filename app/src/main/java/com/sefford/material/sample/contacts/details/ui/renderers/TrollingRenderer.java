@@ -16,6 +16,8 @@
 
 package com.sefford.material.sample.contacts.details.ui.renderers;
 
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import com.sefford.brender.interfaces.Renderer;
 import com.sefford.material.sample.R;
 import com.sefford.material.sample.contacts.details.ui.model.Trolling;
@@ -23,7 +25,11 @@ import com.sefford.material.sample.contacts.details.ui.model.Trolling;
 /**
  * Renderer for {@link Trolling Trolling} elements
  */
-public class TrollingRenderer implements Renderer<Trolling> {
+public class TrollingRenderer extends RecyclerView.ViewHolder implements Renderer<Trolling> {
+
+    public TrollingRenderer(View itemView) {
+        super(itemView);
+    }
 
     @Override
     public void hookUpListeners(Trolling trolling) {

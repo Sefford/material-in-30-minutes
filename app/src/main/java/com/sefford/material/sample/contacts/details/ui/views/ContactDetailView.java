@@ -16,16 +16,15 @@
 
 package com.sefford.material.sample.contacts.details.ui.views;
 
-import android.content.Intent;
 import android.content.res.Resources;
-import android.net.Uri;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import com.sefford.brender.adapters.RendererAdapter;
+import com.sefford.brender.adapters.RecyclerRendererAdapter;
 import com.sefford.brender.interfaces.Renderable;
 import com.sefford.material.sample.R;
 import com.sefford.material.sample.common.model.Contact;
@@ -42,13 +41,13 @@ import java.util.List;
  */
 public class ContactDetailView {
 
-    final RendererAdapter adapter;
+    final RecyclerRendererAdapter adapter;
     final List<Renderable> contactData;
     final LetterTileDrawable placeholder;
     final Resources resources;
 
-    @InjectView(R.id.av_data)
-    AdapterView avData;
+    @InjectView(R.id.rv_data)
+    RecyclerView rvData;
     @InjectView(R.id.iv_cover)
     ImageView ivCover;
     @InjectView(R.id.tb_main)
@@ -56,7 +55,7 @@ public class ContactDetailView {
 
     Picasso picasso;
 
-    public ContactDetailView(RendererAdapter adapter, List<Renderable> contactData, Resources resources) {
+    public ContactDetailView(RecyclerRendererAdapter adapter, List<Renderable> contactData, Resources resources) {
         this.adapter = adapter;
         this.contactData = contactData;
         this.resources = resources;
@@ -66,25 +65,8 @@ public class ContactDetailView {
     public void bind(View view) {
         ButterKnife.inject(this, view);
         picasso = Picasso.with(view.getContext());
-        avData.setAdapter(adapter);
-        avData.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                if (contactData.get(position) instanceof Phone) {
-                    intent.setData(Uri.parse("tel:" + contactData.get(position).toString()));
-                    view.getContext().startActivity(intent);
-                } else if (contactData.get(position) instanceof Mail) {
-                    Uri data = Uri.parse(resources.getString(R.string.mail_uri,
-                            contactData.get(position).toString(),
-                            "Hey, this a mail sent from Material in 30 minutes sample app!",
-                            "Check this cool sample app"));
-                    intent.setType("plain/text");
-                    intent.setData(data);
-                    view.getContext().startActivity(Intent.createChooser(intent, ""));
-                }
-            }
-        });
+        rvData.setAdapter(adapter);
+        rvData.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false));
     }
 
     public void release() {

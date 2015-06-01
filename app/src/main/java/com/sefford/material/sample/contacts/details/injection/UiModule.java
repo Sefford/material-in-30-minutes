@@ -17,8 +17,8 @@
 package com.sefford.material.sample.contacts.details.injection;
 
 import android.content.res.Resources;
-import com.sefford.brender.adapters.RendererAdapter;
-import com.sefford.brender.data.DefaultAdapterData;
+import com.sefford.brender.adapters.RecyclerRendererAdapter;
+import com.sefford.brender.data.RecyclerAdapterData;
 import com.sefford.brender.interfaces.Postable;
 import com.sefford.brender.interfaces.Renderable;
 import com.sefford.material.sample.common.injection.modules.LocalBusModule;
@@ -42,7 +42,7 @@ public class UiModule {
     @Provides
     public ContactDetailView providePresenter(@Named(LocalBusModule.LOCAL_BUS) Postable bus, MaterialRendererFactory factory, Resources resources) {
         final ArrayList<Renderable> renderables = new ArrayList<Renderable>();
-        return new ContactDetailView(new RendererAdapter(new DefaultAdapterData(renderables), factory, bus), renderables,
+        return new ContactDetailView(new RecyclerRendererAdapter(new RecyclerAdapterData(renderables), factory, bus), renderables,
                 resources);
     }
 }

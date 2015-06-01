@@ -16,17 +16,19 @@
 
 package com.sefford.material.sample.contacts.list.ui.views;
 
-import android.content.Intent;
+import android.content.res.Resources;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.AdapterView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import com.sefford.brender.adapters.RendererAdapter;
+import com.sefford.brender.adapters.RecyclerRendererAdapter;
 import com.sefford.brender.interfaces.Renderable;
 import com.sefford.material.sample.R;
 import com.sefford.material.sample.common.model.Contact;
-import com.sefford.material.sample.contacts.details.ui.activities.ContactDetailsActivity;
+import com.sefford.material.sample.common.ui.components.DividerItemDecoration;
 
 import javax.inject.Inject;
 import java.util.Collection;
@@ -37,33 +39,29 @@ import java.util.List;
  */
 public class ContactListView {
 
-    final RendererAdapter adapter;
+    final RecyclerRendererAdapter adapter;
     final List<Renderable> contacts;
+    final Resources resources;
 
-    @InjectView(R.id.av_data)
-    AdapterView avData;
+    @InjectView(R.id.rv_data)
+    RecyclerView rvData;
     @InjectView(R.id.tb_main)
     Toolbar toolbar;
 
     @Inject
-    public ContactListView(RendererAdapter adapter, List<Renderable> contacts) {
+    public ContactListView(RecyclerRendererAdapter adapter, List<Renderable> contacts, Resources resources) {
         this.adapter = adapter;
         this.contacts = contacts;
+        this.resources = resources;
     }
 
     public void bind(View view) {
         ButterKnife.inject(this, view);
         toolbar.setTitle(R.string.app_name);
-        avData.setAdapter(adapter);
-        avData.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(view.getContext(), ContactDetailsActivity.class);
-                intent.putExtra(ContactDetailsActivity.EXTRA_ID, ((Contact) contacts.get(position)).getId());
-                intent.putExtra(ContactDetailsActivity.EXTRA_COLOR, Integer.toString(position));
-                view.getContext().startActivity(intent);
-            }
-        });
+        rvData.setAdapter(adapter);
+        rvData.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false));
+        rvData.addItemDecoration(new DividerItemDecoration(resources.getDrawable(R.drawable.list_horizontal_divider), DividerItemDecoration.VERTICAL_LIST));
+        rvData.setItemAnimator(new DefaultItemAnimator());
     }
 
     public void release() {
@@ -73,7 +71,7 @@ public class ContactListView {
     public void setContacts(Collection<Contact> contacts) {
         if (this.contacts.isEmpty()) {
             this.contacts.addAll(contacts);
-            adapter.notifyDataSetChanged();
+            adapter.notifyItemRangeInserted(0, contacts.size());
         }
     }
 }

@@ -16,8 +16,9 @@
 
 package com.sefford.material.sample.contacts.list.injection;
 
-import com.sefford.brender.adapters.RendererAdapter;
-import com.sefford.brender.data.DefaultAdapterData;
+import android.content.res.Resources;
+import com.sefford.brender.adapters.RecyclerRendererAdapter;
+import com.sefford.brender.data.RecyclerAdapterData;
 import com.sefford.brender.interfaces.Postable;
 import com.sefford.brender.interfaces.Renderable;
 import com.sefford.material.sample.common.injection.modules.LocalBusModule;
@@ -39,8 +40,9 @@ import java.util.ArrayList;
 public class UiModule {
 
     @Provides
-    public ContactListView providePresenter(@Named(LocalBusModule.LOCAL_BUS) Postable bus, MaterialRendererFactory factory) {
+    public ContactListView providePresenter(@Named(LocalBusModule.LOCAL_BUS) Postable bus, MaterialRendererFactory factory,
+                                            Resources resources) {
         final ArrayList<Renderable> renderables = new ArrayList<Renderable>();
-        return new ContactListView(new RendererAdapter(new DefaultAdapterData(renderables), factory, bus), renderables);
+        return new ContactListView(new RecyclerRendererAdapter(new RecyclerAdapterData(renderables), factory, bus), renderables, resources);
     }
 }

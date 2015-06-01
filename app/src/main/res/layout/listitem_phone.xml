@@ -3,4 +3,5 @@
           style="@style/contact_element"
           android:layout_width="match_parent"
           android:layout_height="48dp"
-          android:drawableRight="@drawable/ic_phone_black"/>
+          android:drawableRight="@drawable/ic_phone_black"
+          android:background="@drawable/primary_background_selector"/>

@@ -16,6 +16,7 @@
 
 package com.sefford.material.sample.common.ui.renderers;
 
+import android.content.res.Resources;
 import android.view.View;
 import com.sefford.brender.interfaces.Postable;
 import com.sefford.brender.interfaces.Renderer;
@@ -35,8 +36,11 @@ import javax.inject.Inject;
  */
 public class MaterialRendererFactory implements RendererFactory {
 
+    final Resources resources;
+
     @Inject
-    public MaterialRendererFactory() {
+    public MaterialRendererFactory(Resources resources) {
+        this.resources = resources;
     }
 
     @Override
@@ -45,11 +49,11 @@ public class MaterialRendererFactory implements RendererFactory {
             case R.layout.listitem_contact:
                 return new ContactRenderer(view.getResources(), view);
             case R.layout.listitem_mail:
-                return new MailRenderer(view);
+                return new MailRenderer(view, resources);
             case R.layout.listitem_phone:
                 return new PhoneRenderer(view);
             case R.layout.listitem_trolling:
-                return new TrollingRenderer();
+                return new TrollingRenderer(view);
         }
         return null;
     }
