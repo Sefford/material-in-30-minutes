@@ -36,7 +36,7 @@ public class ContactDetailPresenter {
     ContactDetailView view;
 
     long id;
-    private String userColor;
+    String userColor;
 
     @Inject
     public ContactDetailPresenter(@Named(LocalBusModule.LOCAL_BUS) Bus bus, GetContact getContact) {
@@ -61,13 +61,8 @@ public class ContactDetailPresenter {
     }
 
     public void onEventMainThread(GetContactResponse response) {
-        this.view.setCover(response.getContact(), userColor);
         this.view.setPhones(response.getPhones());
         this.view.setMails(response.getMails());
         this.view.addTrolling();
-    }
-
-    public void setUserColor(String userColor) {
-        this.userColor = userColor;
     }
 }

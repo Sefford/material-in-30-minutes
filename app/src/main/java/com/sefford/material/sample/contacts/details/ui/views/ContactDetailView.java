@@ -55,6 +55,9 @@ public class ContactDetailView {
 
     Picasso picasso;
 
+    String name;
+    String color;
+
     public ContactDetailView(RecyclerRendererAdapter adapter, List<Renderable> contactData, Resources resources) {
         this.adapter = adapter;
         this.contactData = contactData;
@@ -65,19 +68,25 @@ public class ContactDetailView {
     public void bind(View view) {
         ButterKnife.inject(this, view);
         picasso = Picasso.with(view.getContext());
+        toolbar.setTitle(name);
         rvData.setAdapter(adapter);
         rvData.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false));
+        ivCover.setBackground(placeholder);
+    }
+
+    public void configurePlaceholder(String name, String color) {
+        this.name = name;
+        this.color = color;
+        placeholder.setContactDetails(name, color);
     }
 
     public void release() {
         ButterKnife.reset(this);
     }
 
-    public void setCover(Contact contact, String color) {
-        toolbar.setTitle(contact.getName());
-        placeholder.setContactDetails(contact.getName(), color);
+    public void setCover(Contact contact) {
         picasso.load(contact.getPhoto())
-                .placeholder(R.color.primary_pressed_50)
+                .placeholder(placeholder)
                 .error(placeholder)
                 .into(ivCover);
     }

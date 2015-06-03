@@ -12,6 +12,7 @@
                android:layout_height="@dimen/avatar_size"
                android:layout_alignParentLeft="true"
                android:layout_centerVertical="true"
+               android:transitionName="@string/contact_transition_name"
                tools:src="@drawable/avatar_placeholder"/>
 
     <TextView android:id="@+id/tv_name"

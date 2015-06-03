@@ -11,4 +11,5 @@
         Antennagate, although you suck exactly because toys this is why fanboi.
     </string>
     <string name="mail_uri">mailto:%1$s?subject=%2$s&amp;body=%3$s</string>
+    <string name="contact_transition_name">avatar</string>
 </resources>

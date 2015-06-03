@@ -33,6 +33,7 @@ import javax.inject.Inject;
 public class ContactDetailsActivity extends BaseActivity {
 
     public static final String EXTRA_ID = "extra_id";
+    public static final String EXTRA_NAME = "extra_name";
     public static final String EXTRA_COLOR = "extra_color";
 
     @Inject
@@ -49,9 +50,9 @@ public class ContactDetailsActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        view.configurePlaceholder(getIntent().getStringExtra(EXTRA_NAME), getIntent().getStringExtra(EXTRA_COLOR));
         view.bind(getWindow().findViewById(android.R.id.content));
         presenter.setId(getIntent().getLongExtra(EXTRA_ID, 0));
-        presenter.setUserColor(getIntent().getStringExtra(EXTRA_COLOR));
         presenter.bind(view);
     }
 
