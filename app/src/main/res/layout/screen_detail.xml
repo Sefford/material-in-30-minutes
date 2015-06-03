@@ -8,8 +8,10 @@
     <ImageView android:id="@+id/iv_cover"
                android:layout_width="match_parent"
                android:layout_height="256dp"
-               android:scaleType="centerCrop"
-               android:layout_below="@+id/tb_main"/>
+               android:layout_below="@+id/tb_main"
+               android:transitionName="@string/contact_transition_name"
+               android:background="@color/primary_dark"
+               android:scaleType="centerCrop"/>
 
     <android.support.v7.widget.RecyclerView android:id="@+id/rv_data"
                                             android:layout_width="match_parent"

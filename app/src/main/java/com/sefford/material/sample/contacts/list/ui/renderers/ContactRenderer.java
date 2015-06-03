@@ -16,8 +16,10 @@
 
 package com.sefford.material.sample.contacts.list.ui.renderers;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -31,7 +33,6 @@ import com.sefford.material.sample.common.ui.components.LetterTileDrawable;
 import com.sefford.material.sample.common.ui.transformations.RoundedBorderTransformation;
 import com.sefford.material.sample.contacts.details.ui.activities.ContactDetailsActivity;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.RequestCreator;
 import com.squareup.picasso.Transformation;
 
 
@@ -43,6 +44,7 @@ import com.squareup.picasso.Transformation;
 public class ContactRenderer extends RecyclerView.ViewHolder implements Renderer<Contact> {
 
     final Picasso picasso;
+    final Resources resources;
     /**
      * Rounded corners transformation for the Avatar View
      */
@@ -68,6 +70,7 @@ public class ContactRenderer extends RecyclerView.ViewHolder implements Renderer
         this.transformation = new RoundedBorderTransformation(resources.getDimensionPixelSize(R.dimen.avatar_size));
         picasso = Picasso.with(view.getContext());
         placeholder = new LetterTileDrawable(view.getResources(), view.getResources().getDimensionPixelSize(R.dimen.avatar_rounded_corners));
+        this.resources = resources;
     }
 
     @Override
@@ -77,8 +80,11 @@ public class ContactRenderer extends RecyclerView.ViewHolder implements Renderer
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), ContactDetailsActivity.class);
                 intent.putExtra(ContactDetailsActivity.EXTRA_ID, renderable.getId());
+                intent.putExtra(ContactDetailsActivity.EXTRA_NAME, renderable.getName());
                 intent.putExtra(ContactDetailsActivity.EXTRA_COLOR, Integer.toString(position));
-                view.getContext().startActivity(intent);
+                view.getContext().startActivity(intent,
+                        ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) view.getContext(), ivAvatar,
+                                resources.getString(R.string.contact_transition_name)).toBundle());
             }
         });
     }
@@ -86,16 +92,9 @@ public class ContactRenderer extends RecyclerView.ViewHolder implements Renderer
     @Override
     public void render(Contact renderable, int position, boolean first, boolean last) {
         placeholder.setContactDetails(renderable.getName(), Integer.toString(position));
-        configureRequest(picasso.load(renderable.getThumbnail()));
+        ivAvatar.setImageDrawable(placeholder);
         tvName.setText(renderable.getName());
         this.position = position;
-    }
-
-    void configureRequest(RequestCreator creator) {
-        creator.placeholder(R.drawable.avatar_placeholder)
-                .error(placeholder)
-                .transform(transformation)
-                .into(ivAvatar);
     }
 
     @Override

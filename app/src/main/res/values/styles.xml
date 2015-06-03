@@ -10,6 +10,21 @@
         <item name="colorAccent">@color/primary_accented</item>
         <item name="colorControlHighlight">@color/primary_pressed</item>
         <item name="android:textColorPrimary">@android:color/primary_text_light</item>
+        <!-- Enable window content transitions -->
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowAllowEnterTransitionOverlap">true</item>
+        <item name="android:windowAllowReturnTransitionOverlap">true</item>
+        <!-- Specify enter and exit transitions -->
+        <item name="android:windowEnterTransition">@android:transition/explode</item>
+        <item name="android:windowExitTransition">@android:transition/explode</item>
+
+        <!-- Specify shared element transitions -->
+        <item name="android:windowSharedElementEnterTransition">
+            @android:transition/move
+        </item>
+        <item name="android:windowSharedElementExitTransition">
+            @android:transition/move
+        </item>
     </style>
 
     <style name="Material30.ActionBar" parent="ThemeOverlay.AppCompat.ActionBar">
