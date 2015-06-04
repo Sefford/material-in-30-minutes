@@ -28,8 +28,6 @@
                        android:layout_below="@+id/tb_main"
                        android:transitionName="@string/contact_transition_name"
                        android:scaleType="centerCrop"
-                       android:src="@android:color/holo_green_dark"
-                       android:background="@android:color/holo_green_dark"
                        android:fitsSystemWindows="true"
                        app:layout_collapseMode="parallax"/>
 

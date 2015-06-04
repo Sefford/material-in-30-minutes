@@ -18,41 +18,31 @@ package com.sefford.material.sample.contacts.details.ui.renderers;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.TextView;
-import com.sefford.brender.interfaces.Renderer;
 import com.sefford.material.sample.R;
-import com.sefford.material.sample.contacts.details.ui.model.Phone;
+import com.sefford.material.sample.contacts.details.ui.model.ContactData;
 
 /**
- * Renderer for {@link Phone Phone} elements
+ * Renderer for {@link ContactData Phone} elements
  */
-public class PhoneRenderer extends RecyclerView.ViewHolder implements Renderer<Phone> {
+public class PhoneRenderer extends ContactDataRenderer {
 
-    final TextView tvPhone;
-
-    public PhoneRenderer(View view) {
-        super(view);
-        this.tvPhone = (TextView) view;
+    public PhoneRenderer(View itemView) {
+        super(itemView);
     }
 
     @Override
-    public void hookUpListeners(final Phone phone) {
-        itemView.setOnClickListener(new View.OnClickListener() {
+    protected View.OnClickListener createElementListener(final String element) {
+        return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse("tel:" + phone.toString()));
+                intent.setData(Uri.parse("tel:" + element));
                 view.getContext().startActivity(intent);
             }
-        });
+        };
     }
 
-    @Override
-    public void render(Phone phone, int pos, boolean first, boolean last) {
-        tvPhone.setText(phone.toString());
-    }
 
     @Override
     public int getId() {

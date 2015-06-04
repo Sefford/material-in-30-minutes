@@ -18,10 +18,7 @@ package com.sefford.material.sample.contacts.details.responses;
 
 import com.sefford.kor.responses.Response;
 import com.sefford.material.sample.common.model.Contact;
-import com.sefford.material.sample.contacts.details.ui.model.Mail;
-import com.sefford.material.sample.contacts.details.ui.model.Phone;
-
-import java.util.List;
+import com.sefford.material.sample.contacts.details.ui.model.ContactData;
 
 /**
  * Contact Response with the information to populate the UI.
@@ -29,10 +26,10 @@ import java.util.List;
 public class GetContactResponse implements Response {
 
     final Contact contact;
-    final List<Phone> phones;
-    final List<Mail> mails;
+    final ContactData phones;
+    final ContactData mails;
 
-    public GetContactResponse(Contact contact, List<Phone> phones, List<Mail> mails) {
+    public GetContactResponse(Contact contact, ContactData phones, ContactData mails) {
         this.contact = contact;
         this.phones = phones;
         this.mails = mails;
@@ -52,11 +49,11 @@ public class GetContactResponse implements Response {
         return contact;
     }
 
-    public List<Phone> getPhones() {
+    public ContactData getPhones() {
         return phones;
     }
 
-    public List<Mail> getMails() {
+    public ContactData getMails() {
         return mails;
     }
 }

@@ -18,14 +18,11 @@ package com.sefford.material.sample.contacts.details.delegates;
 
 import com.sefford.kor.interactors.interfaces.CacheDelegate;
 import com.sefford.kor.repositories.interfaces.Repository;
+import com.sefford.material.sample.R;
 import com.sefford.material.sample.common.model.Contact;
 import com.sefford.material.sample.contacts.details.errors.GetContactError;
 import com.sefford.material.sample.contacts.details.responses.GetContactResponse;
-import com.sefford.material.sample.contacts.details.ui.model.Mail;
-import com.sefford.material.sample.contacts.details.ui.model.Phone;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.sefford.material.sample.contacts.details.ui.model.ContactData;
 
 /**
  * Retrieves a a {@link Contact Contact} from the {@link com.sefford.material.sample.common.repository.ContactRepository ContactCache}
@@ -51,14 +48,8 @@ public class GetContactDelegate implements CacheDelegate<GetContactResponse, Get
     @Override
     public GetContactResponse execute() throws Exception {
         final Contact contact = repository.get(id);
-        final List<Phone> phones = new ArrayList<>();
-        for (String phone : contact.getPhones()) {
-            phones.add(new Phone(phone));
-        }
-        final List<Mail> mails = new ArrayList<>();
-        for (String mail : contact.getEmails()) {
-            mails.add(new Mail(mail));
-        }
+        final ContactData phones = new ContactData(contact.getPhones(), R.drawable.ic_phone_black, R.layout.listitem_phone);
+        final ContactData mails = new ContactData(contact.getEmails(), R.drawable.ic_email_black, R.layout.listitem_mail);
         return new GetContactResponse(contact, phones, mails);
     }
 

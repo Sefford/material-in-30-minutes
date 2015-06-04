@@ -30,8 +30,7 @@ import com.sefford.brender.interfaces.Renderable;
 import com.sefford.material.sample.R;
 import com.sefford.material.sample.common.model.Contact;
 import com.sefford.material.sample.common.ui.components.LetterTileDrawable;
-import com.sefford.material.sample.contacts.details.ui.model.Mail;
-import com.sefford.material.sample.contacts.details.ui.model.Phone;
+import com.sefford.material.sample.contacts.details.ui.model.ContactData;
 import com.sefford.material.sample.contacts.details.ui.model.Trolling;
 import com.squareup.picasso.Picasso;
 
@@ -95,14 +94,18 @@ public class ContactDetailView {
                 .into(ivCover);
     }
 
-    public void setMails(List<Mail> mails) {
-        this.contactData.addAll(mails);
-        adapter.notifyDataSetChanged();
+    public void setMails(ContactData mails) {
+        if (!mails.getElements().isEmpty()) {
+            this.contactData.add(mails);
+            adapter.notifyDataSetChanged();
+        }
     }
 
-    public void setPhones(List<Phone> phones) {
-        this.contactData.addAll(phones);
-        adapter.notifyDataSetChanged();
+    public void setPhones(ContactData phones) {
+        if (!phones.getElements().isEmpty()) {
+            this.contactData.add(phones);
+            adapter.notifyDataSetChanged();
+        }
     }
 
     public void addTrolling() {

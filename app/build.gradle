@@ -51,9 +51,10 @@ dependencies {
     compile 'com.squareup.dagger:dagger:1.+'
     compile 'com.sefford:kor-common:2.1'
     compile 'de.greenrobot:eventbus:2.4.0'
-    compile'com.sefford:brender:2.0.1'
+    compile 'com.sefford:brender:2.0.1'
     compile 'com.jakewharton:butterknife:6.1.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile "com.android.support:appcompat-v7:22.+"
     compile 'com.android.support:design:22.2.+'
+    compile 'com.android.support:cardview-v7:22.2.+'
 }
