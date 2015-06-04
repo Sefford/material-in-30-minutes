@@ -74,7 +74,6 @@ public class ContactListView {
         dividerDecoration = new DividerItemDecoration(resources.getDrawable(R.drawable.list_horizontal_divider), DividerItemDecoration.VERTICAL_LIST);
 
         rvData.setAdapter(adapter);
-        rvData.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false));
         rvData.addItemDecoration(dividerDecoration);
         rvData.setItemAnimator(new DefaultItemAnimator());
     }
@@ -91,7 +90,6 @@ public class ContactListView {
                         rvData.animate().alpha(1f).setDuration(ANIMATION_DURATION).setListener(null).start();
                     }
                 }).start();
-
                 return true;
             }
         };
@@ -99,6 +97,10 @@ public class ContactListView {
 
     private void switchLayoutManager() {
         layoutMode++;
+        refreshContactLayoutMode();
+    }
+
+    void refreshContactLayoutMode() {
         for (Renderable contact : contacts) {
             ((Contact) contact).setLayoutMode(Contact.LayoutMode.values()[layoutMode % Contact.LayoutMode.values().length]);
         }
@@ -118,7 +120,6 @@ public class ContactListView {
         } else {
             rvData.removeItemDecoration(dividerDecoration);
         }
-
     }
 
     public void release() {
@@ -130,5 +131,6 @@ public class ContactListView {
             this.contacts.addAll(contacts);
             adapter.notifyItemRangeInserted(0, contacts.size());
         }
+        refreshContactLayoutMode();
     }
 }
