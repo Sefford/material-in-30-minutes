@@ -16,6 +16,8 @@
 
 package com.sefford.material.sample.contacts.list.ui.views;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.res.Resources;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.widget.*;
@@ -39,6 +41,7 @@ import java.util.List;
 public class ContactListView {
 
     static final int[] ICONS = {R.drawable.ic_grid_white, R.drawable.ic_dashboard_white, R.drawable.ic_list_white};
+    public static final int ANIMATION_DURATION = 240;
     final RecyclerRendererAdapter adapter;
     final List<Renderable> contacts;
     final Resources resources;
@@ -79,31 +82,43 @@ public class ContactListView {
     Toolbar.OnMenuItemClickListener getMenuListener() {
         return new Toolbar.OnMenuItemClickListener() {
             @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                layoutMode++;
-                for (Renderable contact : contacts) {
-                    ((Contact) contact).setLayoutMode(Contact.LayoutMode.values()[layoutMode % Contact.LayoutMode.values().length]);
-                }
-                switch (Contact.LayoutMode.values()[layoutMode % Contact.LayoutMode.values().length]) {
-                    case LIST:
-                        rvData.setLayoutManager(new LinearLayoutManager(toolbar.getContext(), LinearLayoutManager.VERTICAL, false));
-                        break;
-                    case GRID:
-                        rvData.setLayoutManager(new GridLayoutManager(toolbar.getContext(), 2));
-                        break;
-                    case STAGGER:
-                        rvData.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
-                        break;
-                }
-                if (Contact.LayoutMode.LIST.equals(Contact.LayoutMode.values()[layoutMode % Contact.LayoutMode.values().length])) {
-                    rvData.addItemDecoration(dividerDecoration);
-                } else {
-                    rvData.removeItemDecoration(dividerDecoration);
-                }
-                menuItem.setIcon(ICONS[layoutMode % ICONS.length]);
+            public boolean onMenuItemClick(final MenuItem menuItem) {
+                rvData.animate().alpha(0f).setDuration(ANIMATION_DURATION).setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        switchLayoutManager();
+                        menuItem.setIcon(ICONS[layoutMode % ICONS.length]);
+                        rvData.animate().alpha(1f).setDuration(ANIMATION_DURATION).setListener(null).start();
+                    }
+                }).start();
+
                 return true;
             }
         };
+    }
+
+    private void switchLayoutManager() {
+        layoutMode++;
+        for (Renderable contact : contacts) {
+            ((Contact) contact).setLayoutMode(Contact.LayoutMode.values()[layoutMode % Contact.LayoutMode.values().length]);
+        }
+        switch (Contact.LayoutMode.values()[layoutMode % Contact.LayoutMode.values().length]) {
+            case LIST:
+                rvData.setLayoutManager(new LinearLayoutManager(toolbar.getContext(), LinearLayoutManager.VERTICAL, false));
+                break;
+            case GRID:
+                rvData.setLayoutManager(new GridLayoutManager(toolbar.getContext(), 2));
+                break;
+            case STAGGER:
+                rvData.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+                break;
+        }
+        if (Contact.LayoutMode.LIST.equals(Contact.LayoutMode.values()[layoutMode % Contact.LayoutMode.values().length])) {
+            rvData.addItemDecoration(dividerDecoration);
+        } else {
+            rvData.removeItemDecoration(dividerDecoration);
+        }
+
     }
 
     public void release() {
