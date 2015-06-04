@@ -17,6 +17,7 @@
 package com.sefford.material.sample.contacts.details.ui.views;
 
 import android.content.res.Resources;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -52,6 +53,8 @@ public class ContactDetailView {
     ImageView ivCover;
     @InjectView(R.id.tb_main)
     Toolbar toolbar;
+    @InjectView(R.id.ctl_container)
+    CollapsingToolbarLayout ctlContainer;
 
     Picasso picasso;
 
@@ -68,6 +71,7 @@ public class ContactDetailView {
     public void bind(View view) {
         ButterKnife.inject(this, view);
         picasso = Picasso.with(view.getContext());
+        ctlContainer.setTitle(name);
         toolbar.setTitle(name);
         rvData.setAdapter(adapter);
         rvData.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false));

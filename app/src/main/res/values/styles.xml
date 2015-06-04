@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Material30.Theme" parent="Theme.AppCompat.Light">
+    <style name="Material30.Theme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@android:color/white</item>
         <!-- Main theme colors for branding purposes -->
         <item name="colorPrimary">@color/primary</item>
@@ -38,4 +38,10 @@
         <item name="android:padding">8dp</item>
         <item name="android:textSize">16sp</item>
     </style>
+
+    <style name="Material30.TextAppearance" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/abc_text_size_large_material</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
 </resources>
