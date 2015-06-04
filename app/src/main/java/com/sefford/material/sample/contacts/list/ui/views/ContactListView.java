@@ -17,6 +17,7 @@
 package com.sefford.material.sample.contacts.list.ui.views;
 
 import android.content.res.Resources;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.widget.*;
 import android.view.MenuItem;
 import android.view.View;
@@ -46,6 +47,8 @@ public class ContactListView {
     RecyclerView rvData;
     @InjectView(R.id.tb_main)
     Toolbar toolbar;
+    @InjectView(R.id.cl_main)
+    CoordinatorLayout clMain;
 
     int layoutMode = 0;
     private DividerItemDecoration dividerDecoration;

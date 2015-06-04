@@ -17,25 +17,35 @@
 package com.sefford.material.sample.contacts.details.ui.model;
 
 import com.sefford.brender.interfaces.Renderable;
-import com.sefford.material.sample.R;
+
+import java.util.List;
 
 /**
- * UI Model for Phone elements
+ * Created by sefford on 4/06/15.
  */
-public class Phone implements Renderable {
-    final String phone;
+public class ContactData implements Renderable {
 
-    public Phone(String phone) {
-        this.phone = phone;
+    final List<String> elements;
+    final int resource;
+    final int renderableId;
+
+    public ContactData(List<String> elements, int resource, int renderableId) {
+        this.elements = elements;
+        this.resource = resource;
+        this.renderableId = renderableId;
     }
+
+    public List<String> getElements() {
+        return elements;
+    }
+
+    public int getResource() {
+        return resource;
+    }
+
 
     @Override
     public int getRenderableId() {
-        return R.layout.listitem_phone;
-    }
-
-    @Override
-    public String toString() {
-        return phone;
+        return renderableId;
     }
 }

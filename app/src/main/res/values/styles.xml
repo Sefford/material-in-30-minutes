@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Material30.Theme" parent="Theme.AppCompat.Light">
+    <style name="Material30.Theme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@android:color/white</item>
         <!-- Main theme colors for branding purposes -->
         <item name="colorPrimary">@color/primary</item>
@@ -9,7 +9,7 @@
         <!-- Theme UI controls like checkboxes and text fields -->
         <item name="colorAccent">@color/primary_accented</item>
         <item name="colorControlHighlight">@color/primary_pressed</item>
-        <item name="android:textColorPrimary">@android:color/primary_text_light</item>
+        <item name="android:textColorPrimary">@android:color/primary_text_dark</item>
         <!-- Enable window content transitions -->
         <item name="android:windowContentTransitions">true</item>
         <item name="android:windowAllowEnterTransitionOverlap">true</item>
@@ -30,6 +30,8 @@
     <style name="Material30.ActionBar" parent="ThemeOverlay.AppCompat.ActionBar">
         <item name="android:background">@color/primary</item>
         <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="colorControlNormal">@android:color/white</item>
     </style>
 
     <style name="contact_element">
@@ -38,4 +40,9 @@
         <item name="android:padding">8dp</item>
         <item name="android:textSize">16sp</item>
     </style>
+
+    <style name="Material30.TextAppearance" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/abc_text_size_large_material</item>
+    </style>
+
 </resources>

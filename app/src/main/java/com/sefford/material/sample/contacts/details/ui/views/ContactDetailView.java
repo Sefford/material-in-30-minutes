@@ -17,6 +17,7 @@
 package com.sefford.material.sample.contacts.details.ui.views;
 
 import android.content.res.Resources;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -29,8 +30,7 @@ import com.sefford.brender.interfaces.Renderable;
 import com.sefford.material.sample.R;
 import com.sefford.material.sample.common.model.Contact;
 import com.sefford.material.sample.common.ui.components.LetterTileDrawable;
-import com.sefford.material.sample.contacts.details.ui.model.Mail;
-import com.sefford.material.sample.contacts.details.ui.model.Phone;
+import com.sefford.material.sample.contacts.details.ui.model.ContactData;
 import com.sefford.material.sample.contacts.details.ui.model.Trolling;
 import com.squareup.picasso.Picasso;
 
@@ -52,6 +52,8 @@ public class ContactDetailView {
     ImageView ivCover;
     @InjectView(R.id.tb_main)
     Toolbar toolbar;
+    @InjectView(R.id.ctl_container)
+    CollapsingToolbarLayout ctlContainer;
 
     Picasso picasso;
 
@@ -68,6 +70,7 @@ public class ContactDetailView {
     public void bind(View view) {
         ButterKnife.inject(this, view);
         picasso = Picasso.with(view.getContext());
+        ctlContainer.setTitle(name);
         toolbar.setTitle(name);
         rvData.setAdapter(adapter);
         rvData.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false));
@@ -91,14 +94,18 @@ public class ContactDetailView {
                 .into(ivCover);
     }
 
-    public void setMails(List<Mail> mails) {
-        this.contactData.addAll(mails);
-        adapter.notifyDataSetChanged();
+    public void setMails(ContactData mails) {
+        if (!mails.getElements().isEmpty()) {
+            this.contactData.add(mails);
+            adapter.notifyDataSetChanged();
+        }
     }
 
-    public void setPhones(List<Phone> phones) {
-        this.contactData.addAll(phones);
-        adapter.notifyDataSetChanged();
+    public void setPhones(ContactData phones) {
+        if (!phones.getElements().isEmpty()) {
+            this.contactData.add(phones);
+            adapter.notifyDataSetChanged();
+        }
     }
 
     public void addTrolling() {

@@ -1,20 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                 xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                 android:id="@+id/cl_main"
+                                                 android:layout_width="match_parent"
+                                                 android:layout_height="match_parent">
 
-    <android.support.v7.widget.Toolbar android:id="@+id/tb_main"
-                                       style="@style/Material30.ActionBar"
-                                       android:layout_height="wrap_content"
-                                       android:layout_width="match_parent"
-                                       app:theme="@style/Material30.ActionBar"
-                                       android:elevation="2dp"/>
+    <android.support.design.widget.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+
+        <android.support.v7.widget.Toolbar android:id="@+id/tb_main"
+                                           style="@style/Material30.ActionBar"
+                                           android:layout_height="wrap_content"
+                                           android:layout_width="match_parent"
+                                           android:elevation="2dp"
+                                           app:theme="@style/Material30.ActionBar"
+                                           app:layout_scrollFlags="scroll|enterAlways"/>
+
+    </android.support.design.widget.AppBarLayout>
 
     <android.support.v7.widget.RecyclerView android:id="@+id/rv_data"
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
-                                            android:listSelector="@drawable/primary_background_selector"/>
+                                            android:listSelector="@drawable/primary_background_selector"
+                                            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
-</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

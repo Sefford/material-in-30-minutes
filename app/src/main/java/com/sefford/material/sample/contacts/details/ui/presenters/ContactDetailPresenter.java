@@ -36,7 +36,6 @@ public class ContactDetailPresenter {
     ContactDetailView view;
 
     long id;
-    String userColor;
 
     @Inject
     public ContactDetailPresenter(@Named(LocalBusModule.LOCAL_BUS) Bus bus, GetContact getContact) {
